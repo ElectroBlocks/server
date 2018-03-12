@@ -23,11 +23,15 @@ let writeArduinoCodeFileAndMakeFile = (code, board) => {
     let createFile = Rx.Observable.bindNodeCallback(fs.writeFile);
     let chmodFolder = Rx.Observable.bindNodeCallback(fs.chmod);
 
+    fs.copyFile('sketchbook/Makefile_' + board, 'Makefiledelete', (err) => {
+        console.log(err);
+    })
+
     console.log(filePath, 'file path');
     return makeDirectoryFunc(filePath)
         .flatMap(() => chmodFolder(filePath, '777'))
-        .flatMap(() => copyFileFunc('sketchbook/Makefile_' + board, filePath + '/Makefile'))
         .flatMap(() => createFile(filePath + '/sketch.ino', code))
+        .flatMap(() => copyFileFunc('sketchbook/Makefile_' + board, filePath + '/Makefile'))
         .map(() => folderCreated);
 
 };
@@ -55,7 +59,7 @@ app.post('/upload-code/:board', (req, res) => {
                 .map(() => undefined)
         })
         .catch(err =>  Rx.Observable.of(err))
-        .subscribe(err => err ?  console.error('ERROR', err) : console.log('SUCCESS'));
+        .subscribe(err => err ?  console.error('FAILED', err) : console.log('SUCCESS'));
 });
 
 app.get('/', (req, res) => {
