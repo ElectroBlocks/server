@@ -1,0 +1,6 @@
+ARDUINO_DIR = /usr/share/arduino
+USER_LIB_PATH = /home/vagrant/Code/node-arduino/sketchbook/libraries
+
+BOARD_TAG = uno
+
+include /usr/share/arduino/Arduino.mk
