@@ -23,11 +23,6 @@ let writeArduinoCodeFileAndMakeFile = (code, board) => {
     let createFile = Rx.Observable.bindNodeCallback(fs.writeFile);
     let chmodFolder = Rx.Observable.bindNodeCallback(fs.chmod);
 
-    fs.copyFile('sketchbook/Makefile_' + board, 'Makefiledelete', (err) => {
-        console.log(err);
-    })
-
-    console.log(filePath, 'file path');
     return makeDirectoryFunc(filePath)
         .flatMap(() => chmodFolder(filePath, '777'))
         .flatMap(() => createFile(filePath + '/sketch.ino', code))
