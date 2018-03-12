@@ -1,0 +1,12 @@
+
+
+RFIDRdm630	KEYWORD1
+RFIDTag		KEYWORD1
+
+isAvailable	KEYWORD2
+getTag 		KEYWORD2
+getCardNumber	KEYWORD2
+isValid		KEYWORD2
+
+
+
