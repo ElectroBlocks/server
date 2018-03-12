@@ -55,4 +55,8 @@ app.post('/upload-code/:board', (req, res) => {
         .subscribe(err => err ?  console.error('ERROR', err) : console.log('SUCCESS'));
 });
 
+app.get('/', (req, res) => {
+    res.send('NoDe cOmpILes aRduiNo seRveR')
+})
+
 app.listen(1337, () => console.log('Example app listening on port 1337!'))
