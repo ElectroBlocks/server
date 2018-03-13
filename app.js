@@ -55,7 +55,7 @@ app.post('/upload-code/:board', (req, res) => {
         })
         .catch(err =>  Rx.Observable.of(err))
         .subscribe(err => {
-            if (res.headerSent && err) {
+            if (!res.headerSent && err) {
                 res.send(JSON.stringify({'error': err}));
                 console.error("ERROR COMPILING: " + err);
             }
