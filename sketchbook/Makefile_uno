@@ -1,6 +1,5 @@
 ARDUINO_DIR = /usr/share/arduino
-USER_LIB_PATH = /home/vagrant/Code/node-arduino/sketchbook/libraries
-
+ARDUINO_SKETCHBOOK = /root/node-arduino-compile-server/sketchbook
 BOARD_TAG = uno
-
+ARDUINO_LIBS= SoftwareSerial RFIDRdm630 Adafruit_NeoPixel LiquidCrystal_I2C Wire LedControlMS HygrometerSensor IRremote dht
 include /usr/share/arduino/Arduino.mk

@@ -1,4 +1,17 @@
-## Node Server that compile Arduino Code
+# Node Server that compile Arduino Code
+
+## Setup
+
+1) Git Clone the library
+
+2) run npm install
+
+3) run sudo apt-get install arduino-mk
+
+4) copy the sketchbook library files to /usr/share/arduino/libraries
+
+
+## Usage
 
 So the end point is /upload-code/:board.  Right now it takes in raw code as the post body to compile. Right now we only compile for the arduino uno board.
 
@@ -22,3 +35,5 @@ void loop() {
 ```
 
 If you want to include libraries for the Arduino you have to put them in the sketchbook -> libraries folder.  You will also have to do sudo apt-get install arduino-mk to get the package that actually builds the arduino code.
+
+
