@@ -10,6 +10,15 @@
 
 4) copy the sketchbook library files to /usr/share/arduino/libraries
 
+## Adding a library 
+
+1) Copy the library into the sketchbook -> libraries folder
+
+2) Copy the library into  /usr/share/arduino/libraries
+
+3) Rename the folder the library is in to match the name of the .cpp and .h file
+
+4) Add the library to the Makefile_uno under the key "ARDUINO_LIBS".
 
 ## Usage
 
