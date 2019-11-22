@@ -1,1 +1,1 @@
-docker build -t node-arduino . --no-cache
+docker build -t node-arduino . 
