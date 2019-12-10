@@ -2,31 +2,40 @@
 
 ## Setup
 
-1) Git Clone the library
+1. Install Docker
 
-2) run npm install
+2. Build the container
 
-3) run sudo apt-get install arduino-mk
+```
+sh build.sh
+```
 
-4) copy the sketchbook library files to /usr/share/arduino/libraries
+3. Run the container
 
-## Adding a library 
+```
+sh run-dev.sh
+```
 
-1) Copy the library into the sketchbook -> libraries folder
+OR in production
 
-2) Copy the library into  /usr/share/arduino/libraries
+```
+sh run.sh
+```
 
-3) Rename the folder the library is in to match the name of the .cpp and .h file
+## Adding a library
 
-4) Add the library to the Makefile_uno under the key "ARDUINO_LIBS".
+1. Add the arduino library to the arduino-lib.tar.gz file
+
+2. Add the library to the Makefile_uno under the key "ARDUINO_LIBS".
 
 ## Usage
 
-So the end point is /upload-code/:board.  Right now it takes in raw code as the post body to compile. Right now we only compile for the arduino uno board.
+So the end point is /upload-code/:board. Right now it takes in raw code as the
+post body to compile. Right now we only compile for the arduino uno board.
 
-``` 
+```
 curl -X POST \
-  http://arduino-node.app/upload-code/uno \
+  http://localhost:9000/upload-code/uno \
   -H 'cache-control: no-cache' \
   -H 'postman-token: 907610fc-5665-71cb-ff6e-687ea34831a5' \
   -d 'void setup() {
@@ -43,6 +52,6 @@ void loop() {
 }'
 ```
 
-If you want to include libraries for the Arduino you have to put them in the sketchbook -> libraries folder.  You will also have to do sudo apt-get install arduino-mk to get the package that actually builds the arduino code.
-
-
+If you want to include libraries for the Arduino you have to put them in the
+sketchbook -> libraries folder. You will also have to do sudo apt-get install
+arduino-mk to get the package that actually builds the arduino code.
