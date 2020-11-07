@@ -1,5 +1,0 @@
-ARDUINO_DIR = /usr/share/arduino
-ARDUINO_SKETCHBOOK = /app/sketchbook
-BOARD_TAG = uno
-ARDUINO_LIBS= SoftwareSerial RFIDRdm630 Adafruit_NeoPixel LiquidCrystal_I2C Wire LedControlMS LedControlMS HygrometerSensor IRremote dht ArduinoJson Servo AFMotor
-include /usr/share/arduino/Arduino.mk

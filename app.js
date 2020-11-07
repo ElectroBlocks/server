@@ -1,71 +1,93 @@
 const Promise = require('bluebird');
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require("cors");
 const cmd = Promise.promisifyAll(require('node-cmd'));
 const rimraf = Promise.promisify(require('rimraf'));
 const fs = Promise.promisifyAll(require('fs'));
+const path = require("path");
 
 const app = express();
 app.use(bodyParser.text());
 
-const arduinoMakeFolder = 'sketchbook/';
+const arduinoMakeFolder = path.join(__dirname, "sketches");
 
 /**
  * Writes the arduino code
  */
 const writeArduinoCodeFileAndMakeFile = async (code, board) => {
-  const folderCreated = Date.now() + '_' + Math.floor(Math.random() * 400000);
-  const filePath = arduinoMakeFolder + folderCreated;
+  const fileAndFolderName =
+    Date.now() + "_" + Math.floor(Math.random() * 400000);
+
+  const filePath = path.join(arduinoMakeFolder, fileAndFolderName);
 
   await fs.mkdirAsync(filePath);
 
-  await fs.chmodAsync(filePath, '777');
+  await fs.chmodAsync(filePath, "777");
 
-  await fs.copyFileAsync(
-    'sketchbook/Makefile_' + board,
-    filePath + '/Makefile'
+  await fs.writeFileAsync(
+    path.join(filePath, `${fileAndFolderName}.ino`),
+    code
   );
 
-  await fs.writeFileAsync(filePath + '/sketch.ino', code);
-
-  await fs.copyFileAsync(
-    'sketchbook/Makefile_' + board,
-    filePath + '/Makefile'
-  );
-
-  return folderCreated;
+  return fileAndFolderName;
 };
+
+const getBoard = (board) => {
+  if (board === "uno") {
+    return "arduino:avr:uno";
+  }
+  if (board === "mega") {
+    return "arduino:avr:mega";
+  }
+
+  return null;
+};
+
+app.use(cors());
 
 app.post('/upload-code/:board', async (req, res) => {
   try {
-    let board = req.params['board'];
+    let board = req.params["board"];
 
-    const folderCreatedName = await writeArduinoCodeFileAndMakeFile(
+    const boardName = getBoard(board);
+
+    if (!boardName) {
+      res.status(400);
+      res.json({ error: "invalid board name" });
+      return;
+    }
+
+    console.time("writingfile");
+    const fileAndFolderName = await writeArduinoCodeFileAndMakeFile(
       req.body,
       board
     );
+    console.timeEnd("writingfile");
+
+    console.time("compiling");
 
     await cmd.getAsync(
-      'cd ' +
-        arduinoMakeFolder +
-        folderCreatedName +
-        ' && find . -exec touch {} \\; && make '
+      `arduino-cli compile --fqbn ${boardName} ${path.join(
+        arduinoMakeFolder,
+        fileAndFolderName 
+      )}`
     );
-    res.writeHead(200, {
-      'Content-Type': 'application/octet-stream',
-      'Content-Disposition': 'attachment; filename=sketchcode.hex'
-    });
-    fs.createReadStream(
-      arduinoMakeFolder +
-        folderCreatedName +
-        '/build-' +
-        board +
-        '/' +
-        folderCreatedName +
-        '.hex'
-    ).pipe(res);
+    console.log(boardName.replace(':', '.'))
+    console.timeEnd("compiling");
+    res.sendFile(
+      path.join(
+        arduinoMakeFolder,
+        fileAndFolderName,
+        "build",
+        boardName.replace(':', '.').replace(':', '.'),
+        `${fileAndFolderName}.ino.with_bootloader.hex`
+      )
+    );
 
-    await rimraf(arduinoMakeFolder + folderCreatedName);
+    await rimraf(path.join(
+        arduinoMakeFolder,
+        fileAndFolderName));
   } catch (err) {
     res.send(JSON.stringify({ error: err }));
     console.error('ERROR COMPILING: ' + err);
