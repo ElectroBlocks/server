@@ -25,31 +25,6 @@ arduino-cli lib install IRremote
 arduino-cli lib install "DHT sensor library"
 
 
-# Installing a github library for now
-
-## LED MATRIX
-wget https://github.com/shaai/Arduino_LED_matrix_sketch/archive/master.zip
-mkdir /root/Arduino/libraries/LedControlMS
-mv master.zip  /root/Arduino/libraries/LedControlMS/LedControlMS.zip
-cd /root/Arduino/libraries/LedControlMS 
-unzip LedControlMS.zip
-mv Arduino_LED_matrix_sketch-master/* ./
-rm -rf Arduino_LED_matrix_sketch-master
-rm -rf LedControlMS.zip
-cd /root/electroblocks
-
-## RFID Library
-
-wget https://github.com/electronicdrops/RFIDRdm630/archive/master.zip
-mkdir /root/Arduino/libraries/RFIDRdm630
-mv master.zip  /root/Arduino/libraries/RFIDRdm630/RFIDRdm630.zip
-cd /root/Arduino/libraries/RFIDRdm630 
-unzip RFIDRdm630.zip
-mv RFIDRdm630-master/* ./
-rm -rf RFIDRdm630-master
-rm -rf RFIDRdm630.zip
-cd /root/electroblocks
-
 
 
 
