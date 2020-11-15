@@ -68,9 +68,13 @@ app.post('/upload-code/:board', async (req, res) => {
     console.time("compiling");
 
     await cmd.getAsync(
-      `arduino-cli compile --fqbn ${boardName} ${path.join(
+      `${path.join(
+        __dirname,
+        "bin",
+        "arduino-cli"
+      )} compile --fqbn ${boardName} ${path.join(
         arduinoMakeFolder,
-        fileAndFolderName 
+        fileAndFolderName
       )}`
     );
     console.log(boardName.replace(':', '.'))
