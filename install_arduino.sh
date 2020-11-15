@@ -7,7 +7,7 @@ npm install
 ## The folder for all the ardunio sketches
 mkdir sketches
 
-export PATH=$PATH:/var/www/html/bin
+export PATH=$PATH:/root/electroblocks/bin
 
 ## Install The Arduino Library
 curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | sh
@@ -36,7 +36,7 @@ unzip LedControlMS.zip
 mv Arduino_LED_matrix_sketch-master/* ./
 rm -rf Arduino_LED_matrix_sketch-master
 rm -rf LedControlMS.zip
-cd /var/www/html
+cd /root/electroblocks
 
 ## RFID Library
 
@@ -48,7 +48,7 @@ unzip RFIDRdm630.zip
 mv RFIDRdm630-master/* ./
 rm -rf RFIDRdm630-master
 rm -rf RFIDRdm630.zip
-cd /var/www/html
+cd /root/electroblocks
 
 
 
