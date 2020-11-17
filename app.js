@@ -41,6 +41,10 @@ const getBoard = (board) => {
     return "arduino:avr:mega";
   }
 
+  if (board === "flora") {
+    return "adafruit:avr:flora8";
+  }
+
   return null;
 };
 
