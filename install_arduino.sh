@@ -24,6 +24,9 @@ arduino-cli lib install Servo
 arduino-cli lib install IRremote
 arduino-cli lib install "DHT sensor library"
 
+## ADDED MARCH 5, 2021
+arduino-cli lib install "NTC_Thermistor"
+
 
 
 
