@@ -27,6 +27,9 @@ arduino-cli lib install "DHT sensor library"
 ## ADDED MARCH 5, 2021
 arduino-cli lib install "NTC_Thermistor"
 
+## ADDED MARCH 11
+arduino-cli lib install "Stepper"
+
 
 
 
