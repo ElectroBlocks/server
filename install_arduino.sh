@@ -7,7 +7,7 @@ npm install
 ## The folder for all the ardunio sketches
 mkdir sketches
 
-export PATH=$PATH:/root/electroblocks/bin
+
 
 ## Install The Arduino Library
 curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | sh
@@ -27,10 +27,11 @@ arduino-cli lib install "DHT sensor library"
 ## ADDED MARCH 5, 2021
 arduino-cli lib install "NTC_Thermistor"
 
-## ADDED MARCH 11
+## ADDED MARCH 11 2021
 arduino-cli lib install "Stepper"
 
-
+## ADDED DECEMBER 8 2021
+arduino-cli lib install "FastLED"
 
 
 
