@@ -22,6 +22,27 @@ OR in production
 sh run.sh
 ```
 
+
+## Maintenance
+
+Once a month I check the logs on the server.  
+
+The log files are located here:
+
+```bash
+/home/nodejs/.pm2/logs
+~/.pm2/logs
+```
+
+To solve disk size problems use this command.
+
+```bash
+ncdu /
+```
+
+https://user-images.githubusercontent.com/9620015/149610426-4ee5b861-6591-4ab6-9bd6-5fd8b1bd009e.mov
+
+
 ## Adding a library
 
 1. Add the arduino library to the arduino-lib.tar.gz file
